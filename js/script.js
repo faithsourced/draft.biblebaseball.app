@@ -19,16 +19,24 @@ $('.input-section:not(.last) .next-button').click(function() {
 	$(this).closest('.input-section').next('.input-section').removeClass("folded").find('.text-field').focus();
 });
 
-$('.input-section:not(.last) .text-field').on('keypress', function(e) {
+$('.input-section:not(.last)').on('keypress', '.text-field', function(e) {console.log($(this).parent().attr('class'));
 	if($(this).val() || $(this).parent().hasClass('optional')) {
-		if(e.which == 13 || e.which == 9) {
+		if(e.which == 13 || e.which == 9) {console.log('here');
 			email = $('.input-section .text-field.email').val();
-			
+		
 			if($(this).hasClass('question') && $(this).val().substr(-1) !== "?") {
 				$('.input-section .text-field.question').val($('.input-section .text-field.question').val()+"?");
 			}
 			$(this).closest('.input-section').addClass("fold-up");
 			$(this).closest('.input-section').next('.input-section').removeClass("folded").find('.text-field').focus();
+		}
+	}
+});
+
+$('.input-section.last').on('keypress', '.text-field', function(e) {
+    if($(this).val()) {
+		if(e.which == 13) {
+			submitForm();
 		}
     }
 });
@@ -37,7 +45,7 @@ $('.input-section.last .next-button').click(function() {
 	submitForm();
 });
 
-$('.redo').click(function() {
+$('.redo-button').click(function() {
 	startOver();	
 });
 
@@ -46,55 +54,68 @@ $(window).on('load', function() {
 	$('.input-section .text-field').first().focus();
 });
 
-$('.input-section.last .text-field').on('keypress', function(e) {
-    if($(this).val()) {
-		if(e.which == 13) {
-			submitForm();
-		}
-    }
-});
-
 $(document).keydown(function (e) {
     var keypressed = (e.keyCode ? e.keyCode : e.which);
     if (keypressed == 0 || keypressed == 9) {
         e.preventDefault();
     }
-	if (keypressed == 13 && $("#completed").val() == 1) {
-		startOver();
+	if (keypressed == 13) {
+		if($('.response-section').hasClass("error") || $('.response-section').hasClass("success")) {
+			startOver();
+			e.preventDefault();
+		}
 	}
 });
 
 function startOver() {
 	$('.input-section.fold-up').addClass("folded").removeClass("fold-up");
-	$('.input-section').first().removeClass("folded").addClass("fold-up").next('.input-section').removeClass("folded").find(".text-field").focus();
-	$('.success-section').removeClass("fold-down");
-	$('.input-section:not(.optional) .icon').removeClass("next");
-	$("#completed").val(0);
-	$('.input-section .text-field.email').val(email);
+	if($('.response-section').hasClass("success")) {
+		$('.input-section').first().removeClass("folded").addClass("fold-up").next('.input-section').removeClass("folded").find(".text-field").focus();
+		$(".registration-form form").trigger("reset");
+		$('.input-section .text-field.email').val(email);
+		$('.input-section:not(.optional) .icon').removeClass("next");
+	}
+	else {
+		$('.input-section').first().removeClass("folded").find(".text-field").val('').focus();
+		$('.input-section:not(.optional)').first().find(".icon").removeClass("next");
+	}
+	$('.response-section').removeClass("fold-down error success");
+	$("#submitted").val('');
+	$('.response-section .message').empty();
 }
 
 var form_submit_opts = { 
 	beforeSubmit:	prepareSubmit,			// pre-submit callback
-	success:		submitSuccess,			// post-submit callback
+	success:		handleResponse,			// post-submit callback
 	url:			'submit.php',
-	type:			'POST'
+	method:			'POST',
+	delegation: 	true
 };
 
 $('.registration-form form').ajaxForm(form_submit_opts);
 
 function submitForm() {
+	$('.input-section .text-field').blur(); // remove focus from all fields
 	$('.registration-form form').submit();
 }
 
 function prepareSubmit() {
-	$('.registration-form header').addClass("sending");
+	$('.registration-form header').addClass("sending"); // add rounded corners to header
 	$('.input-section.last').addClass("fold-up");
 }
 
-function submitSuccess() {
-	$('.registration-form header').removeClass("sending");
-	$('.success-section').addClass("fold-down");
-	$(".registration-form form").trigger("reset");
-	$("#completed").val(1);
+function handleResponse(data) {
+	if(data.errors) {
+		$('.response-section').addClass("error");
+		$('.response-section .message').html("<strong>"+data.errors[0].title+"</strong><br />"+data.errors[0].detail);
+		$('.response-section .redo-button').attr("title", "Try again.");
+	}
+	else {
+		$('.response-section').addClass("success");
+		$('.response-section .message').html("<strong>"+data.success[0].title+"</strong><br />"+data.success[0].detail);
+		$('.response-section .redo-button').attr("title", "Submit another question.");
+	}
+	$('.response-section').addClass("fold-down");
+	$('.registration-form header').removeClass("sending"); // remove rounded corners from header
 }
 
