@@ -87,7 +87,7 @@ function startOver() {
 var form_submit_opts = { 
 	beforeSubmit:	prepareSubmit,			// pre-submit callback
 	success:		handleResponse,			// post-submit callback
-	url:			'submit.php',
+	url:			'draft.php',
 	method:			'POST',
 	delegation: 	true
 };
