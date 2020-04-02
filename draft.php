@@ -49,7 +49,7 @@ if(!$_POST['email'] || !preg_match("/^[_a-z0-9-+]+(\.[_a-z0-9-+]+)*@[a-z0-9-]+(\
 else {
 	if($_POST['question'] && $_POST['answer'] && $_POST['incorrect1'] && $_POST['incorrect2'] && $_POST['incorrect3']) {
 		include('lib/phpmailer/PHPMailerAutoload.php');
-		include('lib/config.php');
+		include('config/smtp.php');
 		
 		$mail = new PHPMailer();
 		$mail->CharSet = 'UTF-8';
@@ -57,24 +57,16 @@ else {
 		
 		$mail->isSMTP();
 
-		$mail->Host = 'smtp.emailsrvr.com';
-
-		if ($_SERVER['HTTP_HOST'] == 'togglemedia.dnsalias.com' || $_SERVER['HTTP_HOST'] == 'localhost') {
-			$smtp_port = '587';
-		}
-		else {
-			$smtp_port = '25';
-		}
-
+		$mail->Host = $smtp_host;
 		$mail->Port = $smtp_port;
-		$mail->Username = 'noreply@faithsourced.com';
+		$mail->Username = $smtp_username;
 
 		$mail->SMTPAuth = true;
 		$mail->Password = $smtp_password;
 
-		$mail->setFrom('noreply@faithsourced.com', 'Bible Baseball by Faith Sourced');
+		$mail->setFrom($smtp_username, $smtp_from_name);
 		$mail->addReplyTo($_POST['email'], $_POST['email']);
-		$mail->addAddress('hello@faithsourced.com', 'Faith Sourced');
+		$mail->addAddress($smtp_to_email, $smtp_to_name);
 		$mail->Subject = 'Bible Baseball - Draft a Question';
 
 		$message_pieces = [];
