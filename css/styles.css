@@ -67,6 +67,7 @@ body {
 
 .registration-form header.sending {
 	border-radius: 15px;
+	overflow: hidden;
 }
 
 .registration-form header h1 {
@@ -146,7 +147,15 @@ body {
 	border: 0;
 	padding: 20px 25px;
 	margin: 0;
+	font-size: 16px;
 }
+
+@media (max-width: 320px) {
+	.registration-form form input {
+		font-size: 12px;
+	}
+}
+
 .registration-form form input:focus {
 	outline: none;
 }
@@ -201,14 +210,17 @@ body {
 	width: 100%;
 	border: 0;
 	cursor: pointer;
-	background: limegreen;
+	background: #748088;
 }
 
+.animated-button .next-button.submit {
+	background: limegreen;
+}
 .next {
 	margin-top: -75px;
 }
 
-.success-section {
+.response-section {
 	width: 100%;
 	position: absolute;
 	display: -webkit-box;
@@ -225,30 +237,50 @@ body {
 	box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.2);
 	-webkit-transition: all 0.2s ease-in;
 	transition: all 0.2s ease-in;
-	background: limegreen;
+	background: #fff;
 	margin-top: -75px;
-}
-.success-section p {
-	position: absolute;
-	color: white;
-	font-weight: 100;
-	font-size: 18px;
-	width: 100%;
-	text-align: center;
-	margin: 0;
+	line-height: 100%;
 }
 
-.success-section.fold-down {
+.response-section.fold-down {
 	margin-top: 0;
 }
 
-.redo-button {
+.response-section.success {
+	background: limegreen;
+}
+
+.response-section.error {
+	background: red;
+}
+
+.response-section .message {
+	display: inline-block;
+	color: white;
+	font-weight: 100;
+	font-size: 16px;
+	width: 100%;
+	text-align: center;
+	line-height: 1;
+}
+
+@media (max-width: 320px) {
+	.response-section .message {
+		font-size: 14px;
+	}
+}
+
+.response-section .message strong {
+	font-weight: 800;
+}
+
+.redo-box {
 	position: absolute;
 	width: 20%;
 	right: 0;
 	text-align: center;
 }
-.redo {
+.redo-button {
 	display: inline-block;
 	width: 32px;
 	height: 32px;
@@ -260,6 +292,14 @@ body {
 	font-weight: 100;
 	font-size: 17px;
 	text-decoration: none;
+}
+
+.response-section.success .redo-button {
+	background: limegreen;
+}
+
+.response-section.error .redo-button {
+	background: red;
 }
 
 .faithsourced-attribution {

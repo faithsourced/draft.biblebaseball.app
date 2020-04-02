@@ -32,42 +32,41 @@
 			</header>
 			<form>
 				<div class="input-section">
-					<input class="text-field email" type="email" name="email" placeholder="Enter your email address" autocomplete="off"/>
+					<input class="text-field email" type="email" name="email" placeholder="Type your email address" autocomplete="off"/>
 					<div class="animated-button"><span class="icon"><i class="fa fa-envelope-o"></i></span><span class="next-button" title="Next Step"><i class="fa fa-arrow-up"></i></span></div>
 				</div>
 				<div class="input-section folded">
-					<input class="text-field question" type="text" name="question" placeholder="Enter your Bible trivia question"/>
+					<input class="text-field question" type="text" name="question" placeholder="Type your question"/>
 					<div class="animated-button"><span class="icon"><i class="fa fa-question-circle"></i></span><span class="next-button" title="Next Step"><i class="fa fa-arrow-up"></i></span></div>
 				</div>
 				<div class="input-section folded">
-					<input class="text-field" type="text" name="answer" placeholder="Enter the correct answer"/>
+					<input class="text-field" type="text" name="answer" placeholder="Type the correct answer"/>
 					<div class="animated-button"><span class="icon"><i class="fa fa-check-circle"></i></span><span class="next-button" title="Next Step"><i class="fa fa-arrow-up"></i></span></div>
 				</div>
-				<div class="input-section folded">
-					<input class="text-field" type="text" name="reference" placeholder="Enter answer Bible reference"/>
-					<div class="animated-button"><span class="icon"><i class="fa fa-bookmark"></i></span><span class="next-button" title="Next Step"><i class="fa fa-arrow-up"></i></span></div>
-				</div>
 				<div class="input-section folded optional">
-					<input class="text-field" type="text" name="explanation" placeholder="Enter answer explanation (optional)"/>
+					<input class="text-field" type="text" name="explanation" placeholder="Type an explanation (optional)"/>
 					<div class="animated-button"><span class="icon next"><i class="fa fa-commenting"></i></span><span class="next-button" title="Next Step"><i class="fa fa-arrow-up"></i></span></div>
 				</div>
 				<div class="input-section folded">
-					<input class="text-field" type="text" name="incorrect1" placeholder="Enter an incorrect answer"/>
+					<input class="text-field" type="text" name="reference" placeholder="Type a Bible reference for the answer"/>
+					<div class="animated-button"><span class="icon"><i class="fa fa-bookmark"></i></span><span class="next-button" title="Next Step"><i class="fa fa-arrow-up"></i></span></div>
+				</div>
+				<div class="input-section folded">
+					<input class="text-field" type="text" name="incorrect1" placeholder="Type a wrong answer"/>
 					<div class="animated-button"><span class="icon"><i class="fa fa-times-circle"></i></span><span class="next-button" title="Next Step"><i class="fa fa-arrow-up"></i></span></div>
 				</div>
 				<div class="input-section folded">
-					<input class="text-field" type="text" name="incorrect2" placeholder="Enter a second incorrect answer"/>
+					<input class="text-field" type="text" name="incorrect2" placeholder="Type a second wrong answer"/>
 					<div class="animated-button"><span class="icon"><i class="fa fa-times-circle"></i></span><span class="next-button" title="Next Step"><i class="fa fa-arrow-up"></i></span></div>
 				</div>
 				<div class="input-section folded last">
-					<input class="text-field" type="text" name="incorrect3" placeholder="Enter a third incorrect answer"/>
-					<div class="animated-button"><span class="icon"><i class="fa fa-times-circle"></i></span><span class="next-button" title="Send Question"><i class="fa fa-paper-plane"></i></span></div>
+					<input class="text-field" type="text" name="incorrect3" placeholder="Type a third wrong answer"/>
+					<div class="animated-button"><span class="icon"><i class="fa fa-times-circle"></i></span><span class="next-button submit" title="Send Question"><i class="fa fa-paper-plane"></i></span></div>
 				</div>
-				<div class="success-section"> 
-					<p>Your question has been sent.<br />Thank you!</p>
-					<div class="redo-button" title="Send another question"><span class="redo"><i class="fa fa-refresh"></i></span></div>
+				<div class="response-section"> 
+					<div class='message'></div>
+					<div class="redo-box"><span class="redo-button"><i class="fa fa-refresh"></i></span></div>
 				</div>
-				<input id="completed" type="hidden" value="0">
 			</form>
 		</div>
 		<div class='faithsourced-attribution'><p>Created by <a href="https://faith.dev" target="_blank">FaithSourced</a>.</p></div>
