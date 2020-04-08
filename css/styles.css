@@ -36,7 +36,7 @@ body {
 	border-radius: 15px 15px 0 0;
 	text-align: center;
 	
-	background-image: url('../images/logo.png');
+	background-image: url('../images/biblebaseball-logo.png');
 	background-repeat: no-repeat;
 	background-size:  75%;
 	background-position: center 40px;
@@ -78,6 +78,7 @@ body {
 	text-transform: uppercase;
 	margin: 0;
 }
+
 .registration-form header p {
 	word-spacing: 0px;
 	color: #9facb6;
@@ -86,10 +87,21 @@ body {
 	margin-top: 5px;
 	font-weight: 100;
 }
+
+.registration-form header p strong {
+	display: inline-block;
+	padding: 2px;
+	border: 1px solid #9facb6;
+	font-size: 60%;
+	border-radius: 3px;
+	font-weight: 800;
+}
+
 .registration-form form {
 	position: relative;
 	top: -1px;
 }
+
 .registration-form .input-section {
 	width: 100%;
 	position: absolute;
